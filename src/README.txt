@@ -1,3 +1,0 @@
-Note: I uploaded a couple of pretty old projects (like this one) to my GitHub at around the same time to showcase some projects I worked on in the past. Some of them are incomplete, outdated, or only work on Mac, but I figured I'd upload them anyways.
-
-This is a simple 2D Game where you control two squares (using keyboard input) and have to avoid red balls that bounce around. You have a health bar, an fps counter, and if you run out of health it's game over. Your score is your time alive, and the longer you last the more red balls are added. You can move the squares closer to each other using the wall, but if you try and overlap them they will randomly teleport somewhere on the screen. This is my favorite and most well-polished project of the ones uploaded.

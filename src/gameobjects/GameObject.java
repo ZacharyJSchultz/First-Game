@@ -1,13 +1,21 @@
-package com.Zach.Game;
+/*
+ * The GameObject class is a template for the Player and Enemy classes, containing x and y values, x and y velocities,
+ * as well as all the functions the Objects must have (like getters, setters, tick, render. etc).
+ */
+
+package gameobjects;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import game.ID;
 
 public abstract class GameObject
 {
 		protected int x, y, velX, velY;
 		public ID id;
 		
+		// Basic constructor that sets x, y, and ID
 		public GameObject(int x, int y, ID id)
 		{
 			this.x = x;

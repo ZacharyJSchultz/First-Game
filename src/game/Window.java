@@ -1,4 +1,9 @@
-package com.Zach.Game;
+/*
+ * Window class, which instantiates the JFrame, sets its size, adds the Game to it, and does some other things
+ * related to the window.
+ */
+
+package game;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

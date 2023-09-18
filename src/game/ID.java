@@ -1,8 +1,12 @@
-package com.Zach.Game;
+/*
+ * ID class, which is an enum for all the players and enemies.
+ */
+
+package game;
 
 public enum ID 
 {
-	Player(), //declares the player and enemy as seperate things.
+	Player(),
 	Enemy(),
 	Player2(),
 	Enemy2(),
