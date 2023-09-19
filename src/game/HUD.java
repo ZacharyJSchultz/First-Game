@@ -8,12 +8,13 @@ package game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Timer;
 
 public class HUD 
 {
 	public static int timer = 0;
 	public static int time;				// Acts as score (counts the seconds)
-	public static int count = 299;
+	public static int count = 179;		// 179 / 60 (tick rate) = 3.99
 	public static int health = 200;
 	
 	// Tick function increments the timer and decrements countdown for start of game
@@ -28,13 +29,13 @@ public class HUD
 		if(count > -1)				// Use -1 so I can check if count < 0 for HUD/collisions
 			count--;
 		
-		// Ensures count never drops below -1 or above 299
-		// Starts at 299 so (count / 100) + 1 will be 3 for display (and it's basically one second)
+		// Ensures count never drops below -1 or above 179
+		// Starts at 179 so (count / 60) + 1 will be 3 for display (and it's basically one second)
 		// Note: Deemed this unnecessary, so commented out since it adds unnecessary runtime to function (though very small)
-		//count = Game.clamp(count, -1, 299);
+		//count = Game.clamp(count, -1, 179);
 		
-		// Ensures health never goes above 1000 or below 0
-		health = Game.clamp(health, 0, 1000);
+		// Ensures health never goes above 200 or below 0
+		health = Game.clamp(health, 0, 200);
 		
 		// For debugging
 		//System.out.println(time);
@@ -62,10 +63,12 @@ public class HUD
 		g.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		g.setColor(Color.ORANGE);
 	    g.drawString("FPS: ", 530, 40);
-	    if(Game.getFrames() <= 240)
-	    	g.drawString(Game.getFrames() + "", 565, 40);
-	    else
-	    	g.drawString("240+" + "", 565, 40);
+		
+		/* // Option for if FPS is too large to display (currently disabled)
+	    if(Game.getFrames() <= 9999)
+			g.drawString("240+" + "", 565, 40);
+	    else */
+	    g.drawString(Game.FPS + "", 565, 40);
 	    
 	    // Countdown at the start of the game
 	    if(count > 0)
@@ -75,7 +78,7 @@ public class HUD
 			
 			// Divide by 100 to convert to seconds, and add 1 so the countdown doesn't linger on 0
 			// (e.g. 3, 2, 1, START instead of 3, 2, 1, 0, START)
-		    g.drawString("Countdown: " + ((count / 100) + 1), 410, 40);
+		    g.drawString("Countdown: " + ((count / 60) + 1), 410, 40);
 	    }
 	    // Prints score if countdown is finished
 	    else if(count <= 0)

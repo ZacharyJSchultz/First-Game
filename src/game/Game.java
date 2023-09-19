@@ -8,7 +8,9 @@ package game;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Random; 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // Possible Ideas: Power ups?? High score?? Difficulties? Death Screen/Main Menu? Improved keyboard input?
 
@@ -55,9 +57,20 @@ public class Game extends Canvas implements Runnable
 	private Thread thread;
 	private boolean running = false;
 	
-	private static int frames;
+	private static int frames;	// Total # of frames
+	private int prevFrames;		// This variable is used for the updateFPS function, subtracting frames - prevFrames every second to calculate FPS
+	public static int FPS;		// Current FPS (used for HUD Class and printing FPS to console)
 
 	private Handler handler;
+
+	// Timer to print FPS every second.
+	TimerTask updateFPS = new TimerTask() {
+		public void run() {
+			FPS = frames - prevFrames;
+			prevFrames = frames;
+			System.out.println("FPS: " + FPS);
+		}
+	};
 	
 	// The constructor, which initializes the Handler, HUD, Window, KeyListener, and creates the first 3 GameObjects (2 players, 1 enemy).
 	public Game()
@@ -73,6 +86,9 @@ public class Game extends Canvas implements Runnable
 		player2 = handler.addObject(new Player(randX2, randY2, ID.Player2, handler));
 		
 		enemy1 = handler.addObject(new Enemy(enemySpawnsX, enemySpawnsY, ID.Enemy, handler)); //adds enemy
+
+		Timer t = new Timer();
+		t.scheduleAtFixedRate(updateFPS, 1000, 1000);
 	}
 	
 	// Start method, which creates a Thread, starts it, and sets running to true. Calling thread.start() automatically
@@ -106,7 +122,6 @@ public class Game extends Canvas implements Runnable
 		double amountOfTicks = 60.0;				// Tick rate
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
-		long timer = System.currentTimeMillis();
 		frames = 0;
 		while(running)
 		{
@@ -124,14 +139,13 @@ public class Game extends Canvas implements Runnable
 			if(running) render();	// Calls render function all the time
 			
 			frames++;				// Increments frames
-				
-			// Prints fps about once every second (It's possible it could be > than 1 second, but not by much)
+
+			/* //Prints frames about once every second (It's possible it could be > than 1 second, but not by much)
 			if(System.currentTimeMillis() - timer >= 1000)
 			{
 				timer += 1000;
-				System.out.println("FPS: " + frames);
-				frames = 0;
-			}
+				System.out.println("Frames: " + frames);
+			}*/
 			
 			// These spawn enemies after a sufficient time has passed, then eventually more players.
 			// Used timer instead of HUD.time because need the enemy to spawn only once (and HUD.time will equal
