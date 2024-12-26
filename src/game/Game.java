@@ -106,11 +106,12 @@ public class Game extends Canvas implements Runnable
 		try
 		{
 			running = false;
-			System.exit(1);
+			System.exit(0);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 	

@@ -1,5 +1,8 @@
 # 2D Java Game
 
+![Gameplay Picture 1](/screenshots/Gameplay.png?raw=true)
+![Gameplay Picture 2](/screenshots/Gameplay2.png?raw=true)
+
 June 2022 - September 2023.  
   
 Last updated: September 18, 2023
@@ -12,9 +15,9 @@ I mainly worked on this project over the Summer of 2021, however I revisited it 
 ## Description
 
 ### Basic Overview
-This is a 2D Game project where the player controls yellow square objects and must avoid red circular enemies that bounce around the screen. The player controls all player objects with either the W/A/S/D keys or the arrow keys, and their time spent alive is the score. If you get hit by an enemy, your health will decrease, and if it reaches zero you lose and the game exits. To make the game more challenging, a new enemy spawns every ten seconds, and if you reach a certain threshold then new players will start spawning.
+This is a 2D Game project where the player controls yellow square objects and must avoid red circular enemies that bounce around the screen. The player controls all player objects with either the W/A/S/D keys or the arrow keys, and their time spent alive is their score. If the player gets hit by an enemy, their health will decrease, and if it reaches zero they lose and the game exits. To make the game more challenging, a new enemy spawns every ten seconds, and if you reach a certain threshold then new players will start spawning. Of note, if a player tries to overlap any of the player objects/squares (to artificially make the game easier), all player objects will be randomly teleported somewhere on the screen.
 
-For this project, I designed and coded my own Handler, HUD, Window, KeyInput, and GameObject classes, as well as a Game class that runs the project and an ID enum.
+For this project, I designed and coded my own Handler, HUD, Window, KeyInput, and GameObject classes, as well as a Game class that runs the project.
 
 ### The Game Class
 The Game class is both the class that contains the main method and the class that "manages" all the other classes, ensuring that everything runs. The main method starts things off by calling the Game() constructor, which instantiates the Handler, KeyListener, Window, HUD, and initial Player and Enemy objects. I'll cover what these do later, but the important thing is the Window class calls Game.start() at the end. Game.start() creates a new thread, calls thread.start(), and sets running to true. The Game class both extends Canvas and implements Runnable, which means when thread.start() is called, Game.run() is also called.
